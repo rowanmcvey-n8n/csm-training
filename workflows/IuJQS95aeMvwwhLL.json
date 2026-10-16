@@ -1,0 +1,176 @@
+{
+  "id": "IuJQS95aeMvwwhLL",
+  "name": "My workflow",
+  "description": null,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "a7afacac-bc30-43b4-a468-c71265774836",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "1e80dc31-40f2-41ec-84b1-eb30d55cd654",
+      "name": "Date & Time"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "053ba3c7-1fc4-43aa-9286-6689298f7bbf",
+              "leftValue": "={{ $json.currentDate }}",
+              "rightValue": "2026-09-30T00:00:00",
+              "operator": {
+                "type": "dateTime",
+                "operation": "after"
+              }
+            },
+            {
+              "id": "168ca548-8ab0-4fc3-a8b8-c8b6a0199c85",
+              "leftValue": "={{ $json.currentDate }}",
+              "rightValue": "2026-10-31T00:00:00",
+              "operator": {
+                "type": "dateTime",
+                "operation": "beforeOrEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        448,
+        0
+      ],
+      "id": "a0872b8d-78ab-45ef-90dd-c5867cf14923",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bd627b7e-da2c-4c6d-8a80-bb6d85e2fbde",
+              "name": "holiday",
+              "value": "Halloween",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        672,
+        -96
+      ],
+      "id": "d6541128-df8e-41cb-b070-d779abebd413",
+      "name": "YES HALLOWEEN"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bd627b7e-da2c-4c6d-8a80-bb6d85e2fbde",
+              "name": "holiday",
+              "value": "Not Halloween",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        672,
+        64
+      ],
+      "id": "ee9fff4d-358a-4e2d-be35-dae3be965258",
+      "name": "Not Halloween :("
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Date & Time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "YES HALLOWEEN",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Not Halloween :(",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "triggerCount": 0,
+  "versionId": "d0586836-23d5-4177-84a5-6a7be70187a5",
+  "owner": {
+    "type": "personal",
+    "projectId": "dReHUYB0EJCG1EvT",
+    "projectName": "Rowan McVey <rowan.mcvey@n8n.io>",
+    "personalEmail": "rowan.mcvey@n8n.io"
+  },
+  "parentFolderId": null,
+  "isArchived": false,
+  "nodeGroups": []
+}
